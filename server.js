@@ -51,6 +51,11 @@ app.get('/faculty', async(req, res) => {
     }
 });
 
+app.get('/faculty.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'app/html/faculty.html'));
+
+})
+
 app.get('/courses', (req, res) => {
     res.send('Hello from courses!')
 })
