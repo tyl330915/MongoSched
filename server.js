@@ -51,6 +51,28 @@ app.get('/faculty', async(req, res) => {
     }
 });
 
+app.get('/courses', async(req, res) => {
+    const url = 'mongodb://localhost:27017'; // replace with your MongoDB connection string
+    const client = new MongoClient(url);
+
+    try {
+        await client.connect();
+        const db = client.db('Fall2024');
+        console.log(`Connected successfully to the ${db.databaseName} database`);
+
+        const collection = db.collection('CORCourses');
+        const documents = await collection.find().toArray();
+
+        res.json(documents);
+        //console.log(documents);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error connecting to database');
+    } finally {
+        await client.close();
+    }
+});
+
 app.get('/index.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 })
