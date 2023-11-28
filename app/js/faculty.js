@@ -1,33 +1,39 @@
-window.onload = function() {
+console.log('faculty.js');
+
+document.addEventListener('DOMContentLoaded', (event) => {
     fetch('/faculty')
         .then(response => response.json())
-        .then(data => {
-            console.log(data); // Add this line
-            displayFacData(data);
-        })
+        .then(data => displayFacData(data))
         .catch(error => console.error('Error:', error));
-};
+});
 
+const tableHeaders = ['First Name', 'Last Name', 'Status', 'Email', 'Available'];
 
-function displayFacData(data) {
-    console.log('faculty.js')
-        // Select the element where you want to display the data
-    const dataElement = document.getElementById('data');
+function displayFacData(fac) {
 
-    data.forEach(doc => {
-        // Create a new div for each document
-        const div = document.createElement('div');
+    console.log(fac, fac.length);
+    generateTable(fac, tableHeaders, "table-container");
+    generateAvailableCount(fac);
+    createDeleteSelect(fac);
+    // Select the element where you want to display the data
+    /*
+              const dataElement = document.getElementById('data');
 
-        // Convert the document object to a JSON string for display
-        const text = document.createTextNode(JSON.stringify(doc, null, 2));
+        data.forEach(doc => {
+            // Create a new div for each document
+            const div = document.createElement('div');
 
-        // Add the text to the div
-        div.appendChild(text);
+            // Convert the document object to a JSON string for display
+            const text = document.createTextNode(JSON.stringify(doc, null, 2));
 
-        // Add the div to the data element
-        dataElement.appendChild(div);
-    });
-    console.log(data);
+            // Add the text to the div
+            div.appendChild(text);
+
+            // Add the div to the data element
+            dataElement.appendChild(div);
+        });
+        console.log(data);
+        */
 }
 
 function sortFacList(facList) {
