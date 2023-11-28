@@ -51,9 +51,12 @@ app.get('/faculty', async(req, res) => {
     }
 });
 
+app.get('/index.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+})
+
 app.get('/faculty.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'app/html/faculty.html'));
-
 })
 
 app.get('/courses', (req, res) => {
